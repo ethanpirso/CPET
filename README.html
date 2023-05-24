@@ -1,0 +1,153 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title></title>
+	<meta name="generator" content="LibreOffice 6.4.7.2 (Linux)"/>
+	<meta name="created" content="2023-05-02T09:50:00"/>
+	<meta name="changed" content="2023-05-02T11:02:33.288401123"/>
+	<style type="text/css">
+		@page { size: 21.59cm 27.94cm; margin: 2cm }
+		p { margin-bottom: 0.25cm; background: transparent; direction: ltr; color: #000000; line-height: 115%; orphans: 2; widows: 2; background: transparent }
+		p.western { font-family: "Liberation Serif", serif; font-size: 12pt; so-language: en-CA }
+		p.cjk { font-family: "Lohit Devanagari"; font-size: 12pt; so-language: hi-IN }
+		p.ctl { font-family: "Liberation Serif"; font-size: 12pt }
+		h1 { margin-bottom: 0.21cm; background: transparent; direction: ltr; color: #000000; orphans: 2; widows: 2; background: transparent; page-break-after: avoid }
+		h1.western { font-family: "Liberation Sans", serif; font-size: 24pt; so-language: en-CA; font-weight: bold }
+		h1.cjk { font-family: "Lohit Devanagari"; font-size: 24pt; so-language: hi-IN; font-weight: bold }
+		h1.ctl { font-family: "Liberation Serif"; font-size: 24pt; font-weight: bold }
+		h2 { margin-top: 0.35cm; margin-bottom: 0.21cm; background: transparent; direction: ltr; color: #000000; orphans: 2; widows: 2; background: transparent; page-break-after: avoid }
+		h2.western { font-family: "Liberation Sans", serif; font-size: 18pt; so-language: en-CA; font-weight: bold }
+		h2.cjk { font-family: "Lohit Devanagari"; font-size: 18pt; so-language: hi-IN; font-weight: bold }
+		h2.ctl { font-family: "Liberation Serif"; font-size: 18pt; font-weight: bold }
+		code.western { font-family: "Liberation Mono", serif }
+		code.cjk { font-family: "Liberation Mono" }
+		code.ctl { font-family: "Liberation Mono", monospace }
+		a:link { color: #000080; so-language: zxx; text-decoration: underline }
+		a:visited { color: #800000; so-language: zxx; text-decoration: underline }
+	</style>
+</head>
+<body lang="en-CA" text="#000000" link="#000080" vlink="#800000" dir="ltr"><h1 class="western" align="left">
+<font size="5" style="font-size: 18pt">GaborTracking</font></h1>
+<p class="western" align="left" style="margin-bottom: 0cm; line-height: 100%">
+Author: Ethan Pirso</p>
+<p class="western" align="left" style="margin-bottom: 0cm; line-height: 100%">
+GaborTracking is a MATLAB <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><span lang="en-CA">application</span></font></font></font>
+for conducting Gabor patch tracking experiments with an EyeLink eye
+tracker. It includes functions for initializing the stimulus,
+collecting gaze data, calculating position errors, and updating the
+stimulus position based on specified distributions. The application
+collects eye movement data and determines the contrast threshold of <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><span lang="en-CA">a</span></font></font></font>
+<font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><span lang="en-CA">subject</span></font></font></font>.
+Data is saved in a structured format, and plots can be generated for
+analysis. The <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><span lang="en-CA">data</span></font></font></font>
+can be used to assess <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><span lang="en-CA">contrast
+sensitivity</span></font></font></font> and <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><span lang="en-CA">perform
+refraction</span></font></font></font>.</p>
+<h1 class="western" align="left"><font size="5" style="font-size: 18pt">Contents</font></h1>
+<h2 class="western" align="left"><font size="4" style="font-size: 14pt">CODE
+folder</font></h2>
+<ol>
+	<li><p class="western" align="left" style="margin-bottom: 0cm; line-height: 100%">
+	<code class="western">calc_freq_cpd.m</code>: Calculates the
+	required 'freq' parameter for a Gabor patch in Psychtoolbox based on
+	the desired frequency in cycles per degree (CPD), screen size in
+	centimeters, screen size in pixels, and viewing distance in
+	centimeters.</p>
+	<li><p class="western" align="left" style="margin-bottom: 0cm; line-height: 100%">
+	<code class="western">closeEyelink.m</code>: Stops EyeLink data
+	acquisition, closes the EDF file, downloads the output file, and
+	shuts down the EyeLink system.</p>
+	<li><p class="western" align="left" style="margin-bottom: 0cm; line-height: 100%">
+	<code class="western">collectData.m</code>: Collects eye gaze data
+	from the Eyelink and updates Gabor patch data.</p>
+	<li><p class="western" align="left" style="margin-bottom: 0cm; line-height: 100%">
+	<code class="western">estimateError.m</code>: Calculates position
+	error in real-time and uses MAD as an early trial stopping
+	criterion.</p>
+	<li><p class="western" align="left" style="margin-bottom: 0cm; line-height: 100%">
+	<code class="western">initEyelink.m</code>: Initializes the Eyelink
+	eye tracker and configures the calibration type.</p>
+	<li><p class="western" align="left" style="margin-bottom: 0cm; line-height: 100%">
+	<code class="western">initGabor.m</code>: Initializes the position
+	and properties of the Gabor patch stimulus.</p>
+	<li><p class="western" align="left" style="margin-bottom: 0cm; line-height: 100%">
+	<code class="western">initWin.m</code>: Sets up the Psychtoolbox
+	(PTB) window and defines screen parameters.</p>
+	<li><p class="western" align="left" style="margin-bottom: 0cm; line-height: 100%">
+	<code class="western">params.m</code>: Initializes various
+	parameters for the experiment, such as stimulus size, viewing
+	distance, spatial frequency, step size, dwell time, and contrast
+	step size.</p>
+	<li><p class="western" align="left" style="margin-bottom: 0cm; line-height: 100%">
+	<code class="western">plotData.m</code>: Generates plots of the
+	target and subject gaze positions, normalized position error, and
+	contrast.</p>
+	<li><p class="western" align="left" style="margin-bottom: 0cm; line-height: 100%">
+	<code class="western">prefs.m</code>: Sets preferred Gabor patch
+	stimulus parameters.</p>
+	<li><p class="western" align="left" style="margin-bottom: 0cm; line-height: 100%">
+	<code class="western">run.m</code>: Main script to run the Gabor
+	tracking experiment, collect data, and save results.</p>
+	<li><p class="western" align="left" style="margin-bottom: 0cm; line-height: 100%">
+	<code class="western">updateGabor.m</code>: Updates the position of
+	the Gabor patch based on the specified distribution.</p>
+</ol>
+<p class="western" align="left" style="margin-bottom: 0cm; line-height: 100%">
+<br/>
+
+</p>
+<h2 class="western" align="left"><font size="4" style="font-size: 14pt">DATA
+folder</font></h2>
+<p class="western" align="left" style="margin-bottom: 0cm; line-height: 100%">
+Contains the data obtained from experiments. EyeLink Data Files
+(.EDF) are stored in the <font face="Liberation Serif, serif">EDF</font>
+folder. Figures (.fig) generated by <code class="western">plotData.m</code>
+are stored in the <font face="Liberation Serif, serif">FIG</font>
+folder. The results of the experiment are saved in MATLAB (.mat)
+format in the <font face="Liberation Serif, serif">MAT</font> folder.
+</p>
+<p class="western" align="left" style="margin-bottom: 0cm; line-height: 100%">
+<br/>
+
+</p>
+<h2 class="western" align="left"><font size="4" style="font-size: 14pt">DEMOS
+folder</font></h2>
+<ol>
+	<li><p class="western" align="left" style="margin-bottom: 0cm; line-height: 100%">
+	<code class="western">gaborWalk.m</code>: A demo script to display a
+	Gabor patch following a random walk trajectory.</p>
+	<li><p class="western" align="left" style="margin-bottom: 0cm; line-height: 100%">
+	<code class="western">trackGaze.m</code>: A demo script for gaze
+	tracking using the EyeLink eye tracker.</p>
+</ol>
+<p class="western" align="left" style="margin-bottom: 0cm; line-height: 100%">
+<br/>
+
+</p>
+<h1 class="western" align="left"><font size="5" style="font-size: 18pt">Getting
+Started</font></h1>
+<p class="western" align="left" style="margin-bottom: 0cm; line-height: 100%">
+To begin using GaborTracking, navigate to the CODE folder and run the
+<code class="western">run.m</code> script. This script will execute
+the Gabor tracking experiment, collect data, and save results.</p>
+<p class="western" align="left" style="margin-bottom: 0cm; line-height: 100%">
+<br/>
+
+</p>
+<h2 class="western" align="left">Dependencies</h2>
+<ul>
+	<li><p class="western" align="left" style="margin-bottom: 0cm; line-height: 100%">
+	MATLAB</p>
+	<li><p class="western" align="left" style="margin-bottom: 0cm; line-height: 100%">
+	Psychtoolbox</p>
+	<li><p class="western" align="left" style="margin-bottom: 0cm; line-height: 100%">
+	EyeLink <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><span lang="en-CA">SDK</span></font></font></font>
+	(for eye tracking)</p>
+</ul>
+<p class="western" align="left" style="margin-bottom: 0cm; line-height: 100%">
+<br/>
+
+</p>
+</body>
+</html>
