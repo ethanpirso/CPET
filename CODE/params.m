@@ -140,7 +140,7 @@ switch stim
         fr = 120;
         stimFreq = 1/(1/fr + dwellTime/1000);
     case 4
-        stimSize = 120;
+        stimSize = 110;
         stepSize = 120;
         dwellTime = 120;
         conStep = 1.5;
