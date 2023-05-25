@@ -1,16 +1,24 @@
-% GaborTracking: estimateError.m
+% Continuous Psychophysics with Eye Tracking (CPET): estimateError.m
 % Author: Ethan Pirso
-% Description: Calculates position error in real-time and evaluates early trial stopping criterion.
+% Description: Computes the real-time positional error during a trial and checks for conditions to stop the trial early.
 % Dependencies: None
 % Called by: run.m
 %
 % Input variables in the workspace:
-% - gazeData: Matrix containing gaze positions for each frame.
-% - gaborData: Matrix containing Gabor patch positions and contrast for each frame.
-% - stimFreq: The frequency of Gabor stimulus position updates.
+% - gazeData: Matrix with gaze positions for each frame.
+% - stimData: Matrix with stimulus positions and contrast for each frame.
+% - stimFreq: Frequency of stimulus position updates.
 %
 % Output variables in the workspace:
-% - stop: Flag to indicate if the trial should be stopped early (1 for stopping, 0 otherwise).
+% - stop: A flag indicating if the trial should be stopped early (1 to stop, 0 to continue).
+%
+% The function handles the following tasks:
+% 1. Removal of blink events from the gaze data.
+% 2. Extraction of X and Y positions for both the subject's gaze and the stimulus.
+% 3. Adjustment for potential lag and truncation of the data arrays to ensure synchronous lengths.
+% 4. Calculation and normalization of the position error.
+% 5. Computation of the moving median of the error over an 8-second window.
+% 6. Evaluation of the stopping criterion: if the moving median of the error exceeds a threshold, the 'stop' flag is set to 1, indicating that the trial should be stopped early.
 
 % Remove blinks
 for i=1:length(gazeData)
@@ -34,8 +42,6 @@ y_target = y_target(1:end-39,:);
 x_subject = x_subject(1:end-39,:); 
 y_subject = y_subject(1:end-39,:);
 
-%% Stop criterion: MAD
-
 % Calculate the position error and normalize it
 err = normalize(sqrt((x_subject - x_target).^2 + (y_subject - y_target).^2) ...
     ,'zscore','robust');
@@ -47,32 +53,3 @@ M = movmedian(err, stimFreq*8); % 8 sec moving median
 if any(M > 3)
     stop = 1; % flag to stop trial
 end
-
-%% Stop criterion: Percentage time gaze is within specific radius of target
-
-% % Add a new variable to store the radius (in pixels)
-% % radius = mean(distances) + z*(std(distances)/length(distances))
-% radius = 263; % 26 px ~ one degree of visual angle
-% 
-% % Calculate the distance between gaze position and Gabor position
-% distances = sqrt((x_subject - x_target).^2 + (y_subject - y_target).^2);
-% 
-% % Check if the distance is within the specified radius
-% within_radius = distances <= radius;
-% 
-% % Count the number of frames where the gaze is within the specified radius
-% num_within_radius = sum(within_radius);
-% 
-% % Calculate the percentage of time the gaze is within the specified radius
-% percentage_within_radius = (num_within_radius / length(gazeData)) * 100;
-% 
-% disp(percentage_within_radius)
-% 
-% % Set a threshold for the percentage (e.g., 70%)
-% threshold_percentage = 70; % z = 0.524
-% 
-% % Check if the percentage is below the threshold
-% if percentage_within_radius < threshold_percentage
-%     stop = 1; % flag to stop trial
-% end
-

@@ -1,23 +1,29 @@
-% GaborTracking: updateGabor.m
+% Continuous Psychophysics with Eye Tracking (CPET): updateStim.m
 % Author: Ethan Pirso
-% Description: Draws and updates the position of the Gabor patch based on the specified movement and distribution.
+% Description: This script updates the position of the stimulus in each frame, based on the movement type 
+%              ("smooth" or "saccadic") and the distribution of position updates ("normal" or "uniform"). 
+%              In the case of smooth movement, the script also updates the contrast of the stimulus every 
+%              14 frames. In the case of saccadic movement, the script updates the contrast of the stimulus 
+%              and includes a waiting time after each movement.
+%
 % Dependencies: collectData.m
 % Called by: run.m
 %
 % Input variables in the workspace:
-% - movement: The movement of the Gabor stimulus ("saccadic" or "smooth").
-% - dist: Type of distribution for the Gabor patch position updates ("normal" or "uniform").
-% - stepSize: Distance the Gabor patch moves per step.
-% - screenWidth: Screen width in pixels.
-% - screenHeight: Screen height in pixels.
-% - tw: Gabor patch width in pixels.
-% - th: Gabor patch height in pixels.
-% - gaborX: Current x-coordinate of the Gabor patch.
-% - gaborY: Current y-coordinate of the Gabor patch.
+% - movement: Movement type of the stimulus ("smooth" or "saccadic").
+% - dist: Distribution type for the stimulus position updates ("normal" or "uniform").
+% - stepSize: Distance that the stimulus moves per step.
+% - screenWidth, screenHeight: Screen dimensions in pixels.
+% - stimSize: Stimulus size in pixels.
+% - X, Y: Current coordinates of the stimulus.
+% - conStep: Contrast reduction step.
+% - dwellTime: Dwell time in saccadic movement.
+% - frame: Current frame number.
+% - xPosSmooth, yPosSmooth: Pre-calculated positions for smooth movement.
 %
 % Output variables in the workspace:
-% - gaborX: Updated x-coordinate of the Gabor patch.
-% - gaborY: Updated y-coordinate of the Gabor patch.
+% - X, Y: Updated coordinates of the stimulus.
+% - contrast: Updated contrast of the stimulus.
 
 % Update position of the Gabor
 if movement == "smooth"

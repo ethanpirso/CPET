@@ -1,4 +1,4 @@
-% GaborTracking: initEyelink.m
+% Continuous Psychophysics with Eye Tracking (CPET): initEyelink.m
 % Author: Ethan Pirso
 % Description: Initializes the Eyelink eye tracker and configures the calibration type.
 % Dependencies: None

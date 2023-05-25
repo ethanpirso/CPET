@@ -43,8 +43,6 @@ switch stim
         % Draw Marmoset
         Screen('DrawTexture', win, marmosettex, [], [X Y X + stimSize Y + stimSize]);
         Screen('Flip', win);
-        if mod(frame,14) == 0
-            marmoset = marmoset * (1 - conStep/100) + grey(1) * (conStep/100);
-        end
+        marmoset = marmoset * (contrast / 100) + grey(1) * (1 - contrast / 100);
         marmosettex = Screen('MakeTexture', win, marmoset);
 end

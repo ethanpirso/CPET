@@ -1,18 +1,19 @@
-% GaborTracking: prefs.m
+% Continuous Psychophysics with Eye Tracking (CPET): prefs.m
 % Author: Ethan Pirso
-% Description: Sets preferred Gabor patch stimulus parameters.
+% Description: Sets the preferred parameters for the stimulus in the experiment.
+%              These preferences can be manually adjusted according to the requirements of the experiment.
 % Dependencies: None
 % Called by: params.m (optional)
 %
 % Output variables in the workspace:
-% - size: The preferred size of the Gabor patch stimulus in pixels.
-% - viewingDistanceCm: The preferred distance from the observer to the screen in cm.
-% - freqCpdDesired: The preferred spatial frequency of the Gabor patch in cycles per degree (CPD).
-% - stepSize: The preferred step size of the Gabor patch movement in pixels.
-% - dwellTime: The preferred time interval between each movement step of the Gabor patch in milliseconds.
-% - conStep: The preferred step size for adjusting the contrast of the Gabor patch in percent decrease.
-% - movement: The movement of the Gabor stimulus ("saccadic" or "smooth").
-% - dist: The preferred distribution of the step size ("normal" or "uniform").
+% - stimSize: Preferred size of the stimulus in pixels.
+% - viewingDistanceCm: Preferred distance between the observer and the screen in centimeters.
+% - freqCpdDesired: Preferred spatial frequency of the stimulus in cycles per degree (CPD).
+% - stepSize: Preferred step size for stimulus movement in pixels.
+% - dwellTime: Preferred time interval between each movement step of the stimulus in milliseconds.
+% - conStep: Preferred step size for adjusting the contrast of the stimulus, expressed as a percent decrease.
+% - movement: Preferred type of stimulus movement, either "saccadic" or "smooth".
+% - dist: Preferred distribution for the step size, either "normal" or "uniform".
 
 stimSize = 80;
 viewingDistanceCm = 60;

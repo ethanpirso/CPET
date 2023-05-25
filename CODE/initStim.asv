@@ -55,6 +55,7 @@ switch stim
         marmoset = imresize(marmoset, [stimSize stimSize]);
         marmoset = double(marmoset) ./ 255;
 %         marmoset = imgaussfilt(marmoset);
+%         marmoset(optotype>0.8) = grey(1);
         marmosettex = Screen('MakeTexture', win, marmoset);
 end
 

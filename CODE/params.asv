@@ -1,47 +1,40 @@
-% Continuous Psychophysics with Eye Tracking (CPET): params.m
+% CPET: params.m
 % Author: Ethan Pirso
-% Description: Initializes various parameters for the experiment. These parameters include details about the
-%              experiment mode (demo or not), subject and trial identifiers, stimulus attributes (size, frequency, 
-%              step size, dwell time, contrast step size, etc.), and the screen's attributes. Now it supports 
-%              four types of stimuli: Gabor patch, Letter, Aukland Optotype, and Marmoset stimuli.
+% Description: Initializes various parameters for the experiment, such as stimulus size, viewing distance,
+% spatial frequency, step size, dwell time, and contrast step size.
 % Dependencies: prefs.m (optional), calc_freq_cpd.m
 % Called by: run.m
 %
 % Output variables in the workspace:
-% - demo: A logical variable indicating if the program is running in demo mode (without EyeLink).
+% - demo: A logical variable indicating if program is in demo mode (without EyeLink)
 % - subject: The subject identifier code.
 % - trial: The trial number.
-% - diopters: The diopter of the spherical concave lens used in the experiment.
+% - diopters: The diopter of the spherical concave lens.
 % - trialName: The concatenated subject and trial identifier.
-% - stim: The selected stimulus type (1: Gabor patch, 2: Letter, 3: Optotype, 4: Marmoset Face).
 % - stimSize: The size of the stimulus in pixels.
 % - viewingDistanceCm: The distance from the observer to the screen in cm.
-% - freqCpdDesired: The desired spatial frequency in cycles per degree (CPD).
-% - stepSize: The step size of the stimulus movement in pixels.
+% - freqCpdDesired: The spatial frequency of the Gabor patch in cycles per degree (CPD).
+% - stepSize: The step size of the Gabor patch movement in pixels.
 % - dwellTime: The time interval between each movement step of the stimulus in milliseconds.
-% - conStep: The step size for adjusting the contrast of the stimulus, represented as a percent decrease.
-% - movement: The type of movement for the stimulus ("saccadic" or "smooth").
-% - dist: The distribution of the step size ("normal" or "uniform"), applicable if the movement is "saccadic".
+% - conStep: The step size for adjusting the contrast of the   in percent decrease.
+% - movement: The movement of the stimulus ("saccadic" or "smooth").
+% - dist: The distribution of the step size ("normal" or "uniform").
 % - res: The resolution of the Gabor patch stimulus in pixels.
-% - phase: The phase of the Gabor patch stimulus.
-% - sc: The standard deviation of the Gaussian envelope used for Gabor patch stimulus.
-% - tilt: The tilt of the Gabor patch stimulus.
-% - contrast: The initial contrast of the stimulus.
-% - aspectratio: The aspect ratio of the Gabor patch stimulus.
-% - tw: The width of the Gabor patch stimulus.
-% - th: The height of the Gabor patch stimulus.
-% - x: The horizontal center of the Gabor patch stimulus.
-% - y: The vertical center of the Gabor patch stimulus.
+% - phase: The phase of the Gabor patch.
+% - sc: The standard deviation of the Gaussian envelope.
+% - tilt: The tilt of the Gabor patch.
+% - contrast: The initial contrast of the Gabor patch.
+% - aspectratio: The aspect ratio of the Gabor patch.
+% - tw: The width of the Gabor patch.
+% - th: The height of the Gabor patch.
+% - x: The horizontal center of the Gabor patch.
+% - y: The vertical center of the Gabor patch.
 % - screenWidthCm: The width of the screen in cm.
 % - screenWidthPx: The width of the screen in pixels.
-% - freq: The spatial frequency of the Gabor patch stimulus, calculated using calc_freq_cpd.m.
-% - fr: The desired frame rate of the Psychtoolbox window in Hz.
-% - stimFreq: The frequency of stimulus position updates.
+% - freq: The spatial frequency of the Gabor calculated using calc_freq_cpd.m.
+% - fr: The desired PTB window frame rate in Hz. 
+% - stimFreq: The frequency of Gabor stimulus position updates.
 % - grey: The screen background color in RGB format.
-% - letter: The specific letter used as the stimulus, applicable if the selected stimulus is Letter.
-% - textColor: The color of the letter, applicable if the selected stimulus is Letter.
-% - optoidx: The index of the chosen optotype, applicable if the selected stimulus is Optotype.
-% - optotypes: An array of possible optotypes, applicable if the selected stimulus is Optotype.
 
 commandwindow; % bring command window forward for inputs
 
@@ -60,7 +53,6 @@ fprintf('2: Letter\n');
 fprintf('3: Optotype\n')
 fprintf('4: Marmoset Face\n')
 stim = input('Enter the number corresponding to your selection: ');
-
 switch stim
     case 1
         % Initial stimulus params for the gabor patch

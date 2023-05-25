@@ -14,6 +14,13 @@ clear;
 % Make sure Psychtoolbox is installed
 AssertOpenGL;
 
+% Prompt the experimenter to select the desired movement type
+fprintf('\nSelect the desired movement type:\n');
+fprintf('1: Uniform step size\n');
+fprintf('2: Normal step size\n');
+fprintf('3: Curvilinear trajectory\n');
+movementType = input('Enter the number corresponding to your selection: ');
+
 % Default settings, and unit color range
 PsychDefaultSetup(2);
 
@@ -65,13 +72,6 @@ viewingDistanceCm = 60;
 % Initialize the position of the Gabor
 gaborX = screenWidth / 2 - x;
 gaborY = screenHeight / 2 - y;
-
-% Prompt the experimenter to select the desired movement type
-fprintf('\nSelect the desired movement type:\n');
-fprintf('1: Uniform step size\n');
-fprintf('2: Normal step size\n');
-fprintf('3: Curvilinear trajectory\n');
-movementType = input('Enter the number corresponding to your selection: ');
 
 switch movementType
     case 1 % Set initial prefs for uniform step size

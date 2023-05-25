@@ -1,19 +1,19 @@
-% GaborTracking: collectData.m
+% Continuous Psychophysics with Eye Tracking (CPET): collectData.m
 % Author: Ethan Pirso
-% Description: Collects eye gaze data from the Eyelink and updates Gabor patch data.
+% Description: Collects eye gaze data from the EyeLink and updates stimulus position data.
 % Dependencies: None
 % Called by: run.m
 %
 % Input variables in the workspace:
 % - trackedEye: The eye that is being tracked (el.LEFT_EYE or el.RIGHT_EYE).
 % - el: Eyelink configuration structure.
-% - gaborX: X coordinate of the Gabor patch center on the screen.
-% - gaborY: Y coordinate of the Gabor patch center on the screen.
-% - contrast: Contrast of the Gabor patch.
+% - X: X coordinate of the stimulus center on the screen.
+% - Y: Y coordinate of the stimulus center on the screen.
+% - contrast: Contrast of the stimulus.
 %
 % Output variables in the workspace:
 % - gazeData: Updated matrix containing gaze positions for each frame.
-% - gaborData: Updated matrix containing Gabor patch positions and contrast for each frame.
+% - stimData: Updated matrix containing stimulus positions and contrast for each frame.
 
 if exist('demo','var') && ~demo
     % Collect all data from eyelink
@@ -35,5 +35,5 @@ if exist('demo','var') && ~demo
     end
 end
 
-% Append the gabor position & contrast to the gabor data matrix
+% Append the stimulus position & contrast to the stim data matrix
 stimData = [stimData; X Y contrast];

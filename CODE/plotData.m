@@ -1,18 +1,27 @@
-% GaborTracking: plotData.m
+% Continuous Psychophysics with Eye Tracking (CPET): plotData.m
 % Author: Ethan Pirso
-% Description: Generates plots of the target and subject gaze positions, normalized position error, and contrast.
+% Description: Produces plots visualizing target and subject gaze positions, normalized position error, and contrast. Two figure files are saved to the workspace: one displaying target and subject positions, and the other showing normalized position error and contrast.
 % Dependencies: None
 % Called by: run.m
 %
 % Input variables in the workspace:
-% - gazeData: Matrix containing gaze position data.
-% - gaborData: Matrix containing Gabor position and contrast data.
-% - stimFreq: The frequency of Gabor stimulus position updates.
-% - trialName: String containing the name of the current trial.
+% - gazeData: Matrix with gaze positions for each frame.
+% - stimData: Matrix with stimulus positions and contrast for each frame.
+% - stimFreq: Frequency of stimulus position updates.
+% - trialName: String identifying the current trial.
 %
 % Output variables in the workspace:
-% - fig1: File name of the saved figure containing target and subject gaze positions.
-% - fig2: File name of the saved figure containing normalized position error and contrast.
+% - fig1: File name of the saved figure presenting target and subject gaze positions.
+% - fig2: File name of the saved figure presenting normalized position error and contrast.
+%
+% This script performs the following tasks:
+% 1. Preprocesses gaze and stimulus data to remove blinks, correct for possible lag, and ensure data array synchronization.
+% 2. Extracts and prepares relevant variables for plotting.
+% 3. Generates and saves a figure (fig1) displaying X and Y positions for both the target stimulus and the subject's gaze over time.
+% 4. Computes the normalized positional error and a moving median error over a 3-second window.
+% 5. Determines a contrast threshold based on the moving median error.
+% 6. Calculates a 95% confidence interval for the error.
+% 7. Generates and saves a second figure (fig2) presenting the normalized positional error, moving median error, and stimulus contrast over time, with annotations for the contrast threshold and its confidence interval.
 
 %% Preprocess Data
 

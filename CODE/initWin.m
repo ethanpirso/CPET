@@ -1,8 +1,11 @@
-% GaborTracking: initWin.m
+% Continuous Psychophysics with Eye Tracking (CPET): initWin.m
 % Author: Ethan Pirso
 % Description: Sets up the Psychtoolbox (PTB) window and defines screen parameters.
 % Dependencies: None
 % Called by: run.m
+%
+% Input variables in the workspace:
+% - fr: The desired frame rate of the Psychtoolbox window in Hz.
 %
 % Output variables in the workspace:
 % - win: The window pointer for the PTB window.

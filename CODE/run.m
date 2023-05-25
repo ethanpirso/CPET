@@ -1,15 +1,21 @@
-% GaborTracking: run.m
+% Continuous Psychophysics with Eye Tracking (CPET): run.m
 % Author: Ethan Pirso
-% Description: Main script to run the Gabor tracking experiment, collect data, and save results.
-% Dependencies: params.m, initWin.m, initEyelink.m, initGabor.m, collectData.m,
-%              estimateError.m, updateGabor.m, closeEyelink.m, plotData.m
+% Description: This main script orchestrates the tracking experiment. It initiates the experiment parameters, 
+%              window, and stimuli, then proceeds to start recording via the EyeLink device. The script then enters 
+%              a loop, during which it draws and updates the stimuli, collects and estimates data errors in real-time, 
+%              applies an early stopping criterion (after 30 seconds), and checks for keypresses and contrast levels. 
+%              Upon completion of the loop, the script closes the PTB window, halts recording and disconnects from 
+%              the EyeLink device, plots data, and saves the data in a specific file. 
+% Dependencies: params.m, initWin.m, initEyelink.m, initStim.m, collectData.m,
+%              estimateError.m, drawStim.m, updateStim.m, closeEyelink.m, plotData.m
 %
 % Input variables in the workspace:
 % - None
 %
 % Output variables in the workspace:
-% - conThreshold: Contrast threshold when MAD of position error > 3.
-% - dataFile: File name of the saved data file containing subject info, trial settings, and data.
+% - dataFile: The name of the saved data file which contains the following details: 
+%             subject identification, trial number, diopter value, stimulus selection, stimulus data, gaze data, 
+%             contrast threshold, contrast confidence interval, and lag.
 
 clear; close all
 

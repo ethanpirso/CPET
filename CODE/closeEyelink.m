@@ -1,4 +1,4 @@
-% GaborTracking: closeEyelink.m
+% Continuous Psychophysics with Eye Tracking (CPET): closeEyelink.m
 % Author: Ethan Pirso
 % Description: Stops EyeLink data acquisition, closes the EDF file, downloads the output file, and shuts down the EyeLink system.
 % Dependencies: None
