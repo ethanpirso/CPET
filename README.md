@@ -2,6 +2,12 @@
 
 ### Author: Ethan Pirso
 
+### Research Supervisor: Dr. Curtis L. Baker, McGill Vision Research
+
+I would like to acknowledge the valuable contributions and guidance provided by my research supervisor, Dr. Baker. Their expertise and support have been instrumental in shaping my research work and improving the experiment program. 
+
+## Description
+
 CPET is a MATLAB application for conducting continuous tracking experiments with an EyeLink eye tracker. It includes functions for initializing the stimulus, collecting gaze data, calculating position errors, and updating the stimulus position based on specified distributions. The application collects eye movement data and determines the contrast threshold of a subject. Data is saved in a structured format, and plots can be generated for analysis. The data can be used to assess contrast sensitivity and perform refraction.
 
 ## Contents
