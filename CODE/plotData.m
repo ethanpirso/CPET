@@ -83,13 +83,13 @@ close
 err = normalize(sqrt((x_subject - x_target).^2 + (y_subject - y_target).^2) ...
     ,'zscore','robust');
 M = movmedian(err,stimFreq*3); % 3 sec moving median
-conThreshold = contrast(find(M>=3,1)); % MAD of pos err > 3
+conThreshold = round(contrast(find(M>=3,1)),2); % MAD of pos err > 3
 
 % 95% Confidence interval calculation
-MstdErr = movstd(err,stimFreq*3)/sqrt(stimFreq*3);
+MstdErr = movstd(err,stimFreq*3)/sqrt(stimFreq*3); % moving std. err. over 3 second sliding window
 CI_L = M - 1.96*MstdErr;
 CI_U = M + 1.96*MstdErr;
-conCI = [contrast(find(CI_L>=3,1)), contrast(find(CI_U>=3,1))];
+conCI = [round(contrast(find(CI_L>=3,1)),2), round(contrast(find(CI_U>=3,1)),2)];
 
 figure;
 yyaxis left
@@ -98,25 +98,27 @@ plot(X,err,'.','MarkerSize',0.8,'DisplayName','Error');
 plot(X,M, '-','LineWidth',2,'DisplayName','Moving Error');
 plot(X,CI_L,'LineStyle','--','LineWidth',1,'DisplayName','95% CI Error');
 plot(X,CI_U,'LineStyle','--','LineWidth',1,'HandleVisibility','off');
-ylim([min(err)-1, max(err)+3])
-x1 = xline(X(find(M>=3,1)),'-',{string(conThreshold)},'DisplayName','Contrast Threshold');
+ylim([min(err)-1, max(err)+1])
+x1 = xline(X(find(M>=3,1)),'-',{string(conThreshold)},'FontSize',11,'DisplayName','Contrast Threshold');
 x1.LabelVerticalAlignment = 'middle';
-x1.LabelHorizontalAlignment = 'center';
+x1.LabelHorizontalAlignment = 'left';
 % x1.LabelOrientation = 'horizontal';
 % x1.Color = [0.8500 0.3250 0.0980];
 % x1.LineWidth = 1.5;
-xCI_L = xline(X(find(CI_L>=3,1)),'--',{string(conCI(2))},'DisplayName','95% CI Con. Threshold');
+xCI_L = xline(X(find(CI_L>=3,1)),'--',{string(conCI(1))},'FontSize',11,'DisplayName','95% CI Con. Threshold');
 xCI_L.LabelVerticalAlignment = 'middle';
-xCI_L.LabelHorizontalAlignment = 'center';
+xCI_L.LabelHorizontalAlignment = 'right';
 xCI_L.Color = [0.8500 0.3250 0.0980];
-xCI_U = xline(X(find(CI_U>=3,1)),'--',{string(conCI(1))},'HandleVisibility','off');
+xCI_U = xline(X(find(CI_U>=3,1)),'--',{string(conCI(2))},'FontSize',11,'HandleVisibility','off');
 xCI_U.LabelVerticalAlignment = 'middle';
-xCI_U.LabelHorizontalAlignment = 'center';
+xCI_U.LabelHorizontalAlignment = 'left';
 xCI_U.Color = [0.8500 0.3250 0.0980];
 hold off
 ylabel('Normalized Pos Error (MAD)')
 yyaxis right
-plot(X,contrast,'DisplayName','Stimulus Contrast')
+% plot(X,contrast,'DisplayName','Stimulus Contrast');
+semilogy(X,contrast,'Color',[0.8500 0.3250 0.0980],'DisplayName','Stimulus Contrast');
+xlim([0,max(X)])
 ylim([min(err)-1,20]);
 ylabel('Contrast (%)')
 xlabel('Time (s)')
