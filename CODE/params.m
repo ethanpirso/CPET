@@ -104,7 +104,7 @@ switch stim
         % Initial stimulus params for letter
         letter = input('stimulus letter (e.g. "E"): ','s');
         textColor = [0 0 0];
-        stimSize = 20;
+        stimSize = 26;
         stepSize = 120;
         dwellTime = 120;
         conStep = 1.5;

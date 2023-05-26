@@ -75,6 +75,6 @@ if ~demo
     
     % Save data
     dataFile = append(trialName,'.mat');
-    save(dataFile);
-    movefile(dataFile,'../DATA/MAT');
+    save(dataFile)
+    movefile(dataFile,'../DATA/MAT')
 end

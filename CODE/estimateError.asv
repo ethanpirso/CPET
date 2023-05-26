@@ -35,8 +35,8 @@ x_subject = gazeData(:,1);
 y_subject = gazeData(:,2);
 
 % Fix lag and truncate ends
-[rx,xlags] = xcorr(x_target, x_subject);
-[ry,ylags] = xcorr(y_target, y_subject);
+[rx,xlags] = xcorr(stimData(:,1), gazeData(:,1));
+[ry,ylags] = xcorr(stimData(:,2), gazeData(:,2));
 Elag = min(xlags(rx==max(rx)), ylags(ry==max(ry)));
 x_subject = circshift(x_subject,Elag);
 y_subject = circshift(y_subject,Elag);

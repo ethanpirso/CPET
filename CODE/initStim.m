@@ -65,6 +65,7 @@ if movement == "smooth"
     
     % Initialize random trajectory
     numPoints = 70; % controls speed
+    pointsPerSec = numPoints / stimulusDuration; % speed of stimulus
     canvasSize = 2/3; % proportion of the screen to display image within
     xPos = (rand(1, numPoints-1) * round(screenWidth*canvasSize)) + (screenWidth * (1-canvasSize)/2) - (stimSize / 2);
     yPos = (rand(1, numPoints-1) * round(screenHeight*canvasSize)) + (screenHeight * (1-canvasSize)/2) - (stimSize / 2);

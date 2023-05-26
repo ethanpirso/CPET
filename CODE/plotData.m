@@ -101,7 +101,7 @@ plot(X,CI_U,'LineStyle','--','LineWidth',1,'HandleVisibility','off');
 ylim([min(err)-1, max(err)+1])
 x1 = xline(X(find(M>=3,1)),'-',{string(conThreshold)},'FontSize',11,'DisplayName','Contrast Threshold');
 x1.LabelVerticalAlignment = 'middle';
-x1.LabelHorizontalAlignment = 'left';
+x1.LabelHorizontalAlignment = 'center';
 % x1.LabelOrientation = 'horizontal';
 % x1.Color = [0.8500 0.3250 0.0980];
 % x1.LineWidth = 1.5;
