@@ -37,6 +37,7 @@ end
 [rx,xlags] = xcorr(stimData(:,1), gazeData(:,1));
 [ry,ylags] = xcorr(stimData(:,2), gazeData(:,2));
 lag = min(xlags(rx==max(rx)), ylags(ry==max(ry)));
+% stem(xlags, rx);
 gazeData = circshift(gazeData,lag,1);
 gazeData = gazeData(1:end+lag,:);
 stimData =stimData(1:end+lag,:);

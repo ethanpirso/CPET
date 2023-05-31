@@ -47,7 +47,7 @@ commandwindow; % bring command window forward for inputs
 
 demo = input('\nrun as demo without EyeLink? 1 or 0 (yes or no): ');
 if ~demo
-    subject = input('enter subject identifier code: ','s');
+    subject = input('enter subject identifier code (e.g. 001): ','s');
     trial = input('enter trial number: ','s');
     diopters = input('enter diopter of spherical lens: ');
     trialName = append(subject,'_',trial);
