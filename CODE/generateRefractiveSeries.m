@@ -1,4 +1,4 @@
-% Continuous Psychophysics with Eye Tracking (CPET): GenerateRefractiveSeries.m
+% Continuous Psychophysics with Eye Tracking (CPET): generateRefractiveSeries.m
 % Author: Ethan Pirso
 % Description: This script generates a refractive series for a given subject and trial range. The script prompts the 
 %              user for a subject ID and trial range, then loads the corresponding data from .mat files. The data includes 
