@@ -38,12 +38,14 @@ y_subject = gazeData(:,2);
 [rx,xlags] = xcorr(x_target, x_subject);
 [ry,ylags] = xcorr(y_target, y_subject);
 Elag = min(xlags(rx==max(rx)), ylags(ry==max(ry)));
-x_subject = circshift(x_subject,Elag);
-y_subject = circshift(y_subject,Elag);
-x_target = x_target(1:end+Elag,:);
-y_target = y_target(1:end+Elag,:);
-x_subject = x_subject(1:end+Elag,:); 
-y_subject = y_subject(1:end+Elag,:);
+if Elag <= 0 % assume that gaze lags target position always
+    x_subject = circshift(x_subject,Elag);
+    y_subject = circshift(y_subject,Elag);
+    x_target = x_target(1:end+Elag,:);
+    y_target = y_target(1:end+Elag,:);
+    x_subject = x_subject(1:end+Elag,:); 
+    y_subject = y_subject(1:end+Elag,:);
+end
 
 % Calculate the position error and normalize it
 err = normalize(sqrt((x_subject - x_target).^2 + (y_subject - y_target).^2) ...
