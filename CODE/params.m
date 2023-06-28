@@ -18,10 +18,11 @@
 % - viewingDistanceCm: The distance from the observer to the screen in cm.
 % - freqCpdDesired: The desired spatial frequency in cycles per degree (CPD).
 % - stepSize: The step size of the stimulus movement in pixels.
-% - dwellTime: The time interval between each movement step of the stimulus in milliseconds.
+% - dwellTime: For jitter, the time interval between each update (movement step) of the stimulus in milliseconds.
+% - dwellFrames: For curvilinear trajectory, the number of frames between each stimulus update.
 % - conStep: The step size for adjusting the contrast of the stimulus, represented as a percent decrease.
-% - movement: The type of movement for the stimulus ("saccadic" or "smooth").
-% - dist: The distribution of the step size ("normal" or "uniform"), applicable if the movement is "saccadic".
+% - movement: The type of movement for the stimulus (jitter or curvilinear trajectory).
+% - dist: The distribution of the step size (normal or uniform), applicable if the movement is jitter.
 % - res: The resolution of the Gabor patch stimulus in pixels.
 % - phase: The phase of the Gabor patch stimulus.
 % - sc: The standard deviation of the Gaussian envelope used for Gabor patch stimulus.
@@ -71,13 +72,21 @@ switch stim
                 stimSize = input('stimulus size, pixels (e.g. 75): ');
                 viewingDistanceCm = input('viewing distance, cm: ');
                 freqCpdDesired = input('spatial frequency, cpd (e.g. 4): ');
-                stepSize = input('stepSize, pixels (e.g. 150): ');
-                dwellTime = input(['dwell time for each target presentation, ' ...
-                    'msec (e.g. 50): ']);
                 conStep = input('constrast step size, percent decrease (e.g. 1): ');
-                movement = input('"saccadic" or "smooth" stimulus movement: ','s');
-                if movement == "saccadic"
-                    dist = input('"normal" or "uniform" distributed step size: ','s');
+                fprintf('Select the desired movement type:\n');
+                fprintf('1: Jitter\n');
+                fprintf('2: Curvilinear Trajectory\n');
+                movement = input('Enter the number corresponding to your selection: ');
+                switch movement 
+                    case 1
+                        stepSize = input('stepSize, pixels (e.g. 150): ');
+                        dwellTime = input(['dwell time for each target presentation, ' ...
+                            'msec (e.g. 50): ']);
+                        dist = input('enter "n" for normal or "u" for uniform distributed step size: ','s');
+                    case 2
+                        % IMPORTANT: choosing a dwellFrames too small triggers an error when 
+                        % making call to Eyelink('GetQueuedData') in collectData.m
+                        dwellFrames = input('number of frames between each stimulus update: ');
                 end
         
             otherwise
@@ -98,8 +107,11 @@ switch stim
         screenWidthPx = 1024;
         freq = calc_freq_cpd(screenWidthCm, screenWidthPx, viewingDistanceCm, freqCpdDesired);
         fr = 120;
-        stimFreq = 1/(1/fr + dwellTime/1000);
-
+        if movement == 1
+            stimFreq = 1/(1/fr + dwellTime/1000);
+        elseif movement == 2
+            stimFreq = 1/(1/fr + dwellFrames/fr);
+        end
     case 2
         % Initial stimulus params for letter
         letter = input('stimulus letter (e.g. "E"): ','s');
@@ -107,19 +119,16 @@ switch stim
         stimSize = 26;
         stepSize = 120;
         dwellTime = 120;
+        dwellFrames = 14;
         conStep = 1.5;
-        movement = "smooth";
-%         stepSize = input('stepSize, pixels (e.g. 150): ');
-%         dwellTime = input(['dwell time for each target presentation, ' ...
-%             'msec (e.g. 50): ']);
-%         conStep = input('constrast step size, percent decrease (e.g. 1): ');
-%         movement = input('"saccadic" or "smooth" stimulus movement: ','s');
-%         if movement == "saccadic"
-%             dist = input('"normal" or "uniform" distributed step size: ','s');
-%         end
+        movement = 2;
         contrast = 100;
         fr = 120;
-        stimFreq = 1/(1/fr + dwellTime/1000);
+        if movement == 1
+            stimFreq = 1/(1/fr + dwellTime/1000);
+        elseif movement == 2
+            stimFreq = 1/(1/fr + dwellFrames/fr);
+        end
     case 3
         % Initial stimulus params for Aukland Optotype
         % Prompt the experimenter to select the desired optotype
@@ -134,20 +143,30 @@ switch stim
         stimSize = 40;
         stepSize = 120;
         dwellTime = 120;
+        dwellFrames = 14;
         conStep = 1.5;
-        movement = "smooth";
+        movement = 2;
         contrast = 100;
         fr = 120;
-        stimFreq = 1/(1/fr + dwellTime/1000);
+        if movement == 1
+            stimFreq = 1/(1/fr + dwellTime/1000);
+        elseif movement == 2
+            stimFreq = 1/(1/fr + dwellFrames/fr);
+        end
     case 4
         stimSize = 110;
         stepSize = 120;
         dwellTime = 120;
+        dwellFrames = 14;
         conStep = 1.5;
-        movement = "smooth";
+        movement = 2;
         contrast = 100;
         fr = 120;
-        stimFreq = 1/(1/fr + dwellTime/1000);
+        if movement == 1
+            stimFreq = 1/(1/fr + dwellTime/1000);
+        elseif movement == 2
+            stimFreq = 1/(1/fr + dwellFrames/fr);
+        end
 end
 
 % Define screen colours

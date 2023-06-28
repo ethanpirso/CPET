@@ -11,6 +11,7 @@
 % - freqCpdDesired: Preferred spatial frequency of the stimulus in cycles per degree (CPD).
 % - stepSize: Preferred step size for stimulus movement in pixels.
 % - dwellTime: Preferred time interval between each movement step of the stimulus in milliseconds.
+% - dwellFrames: Preferred number of frames between each stimulus update.
 % - conStep: Preferred step size for adjusting the contrast of the stimulus, expressed as a percent decrease.
 % - movement: Preferred type of stimulus movement, either "saccadic" or "smooth".
 % - dist: Preferred distribution for the step size, either "normal" or "uniform".
@@ -20,6 +21,7 @@ viewingDistanceCm = 80;
 freqCpdDesired = 4.5;
 stepSize = 130;
 dwellTime = 120;
+dwellFrames = 11;
 conStep = 1.2;
-movement = "smooth";
-dist = "uniform"; 
+movement = 2;
+dist = "u"; 
