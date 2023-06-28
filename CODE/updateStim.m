@@ -7,7 +7,7 @@
 %              and includes a waiting time after each movement.
 %
 % Dependencies: collectData.m
-% Called by: run.m
+% Called by: runCPET.m
 %
 % Input variables in the workspace:
 % - movement: Movement type of the stimulus ("smooth" or "saccadic").

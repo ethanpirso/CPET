@@ -2,7 +2,7 @@
 % Author: Ethan Pirso
 % Description: Initializes the Eyelink eye tracker and configures the calibration type.
 % Dependencies: None
-% Called by: run.m
+% Called by: runCPET.m
 %
 % Input variables in the workspace:
 % - trialName: Identifier for the current trial.

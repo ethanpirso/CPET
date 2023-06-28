@@ -2,7 +2,7 @@
 % Author: Ethan Pirso
 % Description: Computes the real-time positional error during a trial and checks for conditions to stop the trial early.
 % Dependencies: None
-% Called by: run.m
+% Called by: runCPET.m
 %
 % Input variables in the workspace:
 % - gazeData: Matrix with gaze positions for each frame.
@@ -50,7 +50,7 @@ err = normalize(sqrt((x_subject - x_target).^2 + (y_subject - y_target).^2) ...
     ,'zscore','robust');
 
 % Calculate the moving average of the error
-M = movmedian(err, stimFreq*8); % 8 sec moving median
+M = movmedian(err, stimFreq*9); % 9 sec moving median
 
 % Check if the moving average exceeds the threshold
 if any(M > 3)

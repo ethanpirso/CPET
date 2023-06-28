@@ -3,7 +3,7 @@
 % Description: Initializes the position and properties of the stimulus.
 %              This script is generalized to handle different types of stimuli like Gabor patches, Letters, Aukland Optotypes, and Marmoset stimuli.
 % Dependencies: None
-% Called by: run.m
+% Called by: runCPET.m
 %
 % Input variables in the workspace:
 % - screenWidth: Width of the screen in pixels.

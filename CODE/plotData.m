@@ -2,7 +2,7 @@
 % Author: Ethan Pirso
 % Description: Produces plots visualizing target and subject gaze positions, normalized position error, and contrast. Two figure files are saved to the workspace: one displaying target and subject positions, and the other showing normalized position error and contrast.
 % Dependencies: None
-% Called by: run.m
+% Called by: runCPET.m
 %
 % Input variables in the workspace:
 % - gazeData: Matrix with gaze positions for each frame.

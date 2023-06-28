@@ -2,7 +2,7 @@
 % Author: Ethan Pirso
 % Description: Collects eye gaze data from the EyeLink and updates stimulus position data.
 % Dependencies: None
-% Called by: run.m
+% Called by: runCPET.m
 %
 % Input variables in the workspace:
 % - trackedEye: The eye that is being tracked (el.LEFT_EYE or el.RIGHT_EYE).

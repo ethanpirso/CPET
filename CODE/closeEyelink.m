@@ -2,7 +2,7 @@
 % Author: Ethan Pirso
 % Description: Stops EyeLink data acquisition, closes the EDF file, downloads the output file, and shuts down the EyeLink system.
 % Dependencies: None
-% Called by: run.m
+% Called by: runCPET.m
 %
 % Input variables in the workspace:
 % - edfFile: Name of the EyeLink EDF file.

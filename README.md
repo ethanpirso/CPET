@@ -25,7 +25,7 @@ CPET is a MATLAB application for conducting continuous tracking experiments with
     10. params.m: Initializes various parameters for the experiment, such as stimulus type, stimulus size, viewing distance, spatial frequency, step size, dwell time, and contrast step size.
     11. plotData.m: Generates plots of the target and subject gaze positions, normalized position error, and contrast.
     12. prefs.m: Sets preferred stimulus parameters.
-    13. run.m: Main script to run the tracking experiment, collect data, and save results.
+    13. runCPET.m: Main script to run the tracking experiment, collect data, and save results.
     14. updateStim.m: Updates the position of the stimulus based on the specified distribution and movement type.
     
 ### DATA folder
@@ -39,9 +39,9 @@ The folder to serve as storage for experiment data, created after running the pr
 Contains the images for Aukland Optotypes and Marmoset stimuli.
 
 ## Getting Started
-To begin using CPET, navigate to the CODE folder and run the run.m script. This script will execute the tracking experiment, collect data, and save results.
+To begin using CPET, navigate to the CODE folder and run the runCPET.m script. This script will execute the tracking experiment, collect data, and save results.
 
-To run in 'demo' mode without EyeLink, enter '1' when prompted in the run.m script. The program will only play the stimulus on screen and no subject data is collected or saved.
+To run in 'demo' mode without EyeLink, enter '1' when prompted in the runCPET.m script. The program will only play the stimulus on screen and no subject data is collected or saved.
 
 For refractive analysis, you can run the generateRefractiveSeries.m script after completing a range of trials with a subject. This script will help in understanding how the subject's contrast thresholds vary with different diopters, which is crucial in determining the 'best' lens power for the subject. The generated plot and all extracted data will be saved for future reference.
 

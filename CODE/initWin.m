@@ -2,7 +2,7 @@
 % Author: Ethan Pirso
 % Description: Sets up the Psychtoolbox (PTB) window and defines screen parameters.
 % Dependencies: None
-% Called by: run.m
+% Called by: runCPET.m
 %
 % Input variables in the workspace:
 % - fr: The desired frame rate of the Psychtoolbox window in Hz.

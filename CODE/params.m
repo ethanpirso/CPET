@@ -5,7 +5,7 @@
 %              step size, dwell time, contrast step size, etc.), and the screen's attributes. Now it supports 
 %              four types of stimuli: Gabor patch, Letter, Aukland Optotype, and Marmoset stimuli.
 % Dependencies: prefs.m (optional), calc_freq_cpd.m
-% Called by: run.m
+% Called by: runCPET.m
 %
 % Output variables in the workspace:
 % - demo: A logical variable indicating if the program is running in demo mode (without EyeLink).

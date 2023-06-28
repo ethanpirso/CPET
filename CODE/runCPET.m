@@ -1,4 +1,4 @@
-% Continuous Psychophysics with Eye Tracking (CPET): run.m
+% Continuous Psychophysics with Eye Tracking (CPET): runCPET.m
 % Author: Ethan Pirso
 % Description: This main script orchestrates the tracking experiment. It initiates the experiment parameters, 
 %              window, and stimuli, then proceeds to start recording via the EyeLink device. The script then enters 
