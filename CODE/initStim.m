@@ -16,7 +16,7 @@
 % - th: Height of the Gabor patch in pixels.
 % - optotypes: Array containing the names of optotype images.
 % - optoidx: Index for the optotype array.
-% - movement: The type of movement for the stimulus ("smooth" for smooth pursuit).
+% - movement: The type of movement for the stimulus (2 for curvilinear trajectory).
 %
 % Output variables in the workspace:
 % - gabortex: Procedural Gabor texture (if Gabor patch is the selected stimulus).
@@ -26,9 +26,9 @@
 % - X: X coordinate of the stimulus center on the screen.
 % - Y: Y coordinate of the stimulus center on the screen.
 % - xPosSmooth, yPosSmooth: Smooth curvilinear trajectory for smooth pursuit movement.
-% - stimulusDuration: Duration for displaying the stimulus (only for smooth pursuit movement).
-% - numFrames: The number of frames based on stimulus duration and velocity (only for smooth pursuit movement).
-% - frameDuration: Duration for a frame (only for smooth pursuit movement).
+% - stimulusDuration: Duration for displaying the stimulus (only for curvilinear trajectory movement).
+% - numFrames: The number of frames based on stimulus duration and velocity (only for curvilinear trajectory movement).
+% - frameDuration: Duration for a frame (only for curvilinear trajectory movement).
 
 % Initialize the position of the stimulus
 X = (screenWidth / 2) - (stimSize / 2);
@@ -58,8 +58,8 @@ switch stim
         marmosettex = Screen('MakeTexture', win, marmoset);
 end
 
-% Initialize stimulus positions for smooth pursuit
-if movement == "smooth"
+% Initialize stimulus positions for curvilinear trajectory
+if movement == 2 
     % Set stimulus display time
     stimulusDuration = 120; % seconds
     
