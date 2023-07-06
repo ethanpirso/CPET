@@ -97,7 +97,7 @@ switch stim
         phase = 0;
         sc = 10;
         tilt = 0;
-        contrast = 20;
+        contrast = 60;
         aspectratio = 1.0;
         tw = res(1);
         th = res(2);

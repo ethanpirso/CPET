@@ -51,6 +51,11 @@ for trial = trialStart:trialEnd
     end
 end
 
+% Sort data arrays
+[diopters,sortIdx] = sort(diopters,'ascend');
+conThresholds = conThresholds(sortIdx);
+conCIs = conCIs(sortIdx,:);
+
 % Compute error values as the difference between the confidence interval bounds and the contrast thresholds
 lowerErrors = conThresholds - conCIs(:, 1);
 upperErrors = conCIs(:, 2) - conThresholds;
