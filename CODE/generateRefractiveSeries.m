@@ -67,8 +67,9 @@ title(sprintf('Contrast Thresholds for Subject %s, Trials %d to %d', subjectID, 
 xlabel('Diopter');
 ylabel('Contrast Threshold (%)');
 
-% Fit a 3rd degree polynomial to the data
-p = polyfit(diopters, conThresholds, 3);
+% Fit a 3rd degree weighted polynomial to the data
+W = 1 - normalize(abs(upperErrors - lowerErrors),'range');
+p = wpolyfit(diopters, conThresholds, 3, W);
 x2 = linspace(min(diopters), max(diopters), 100);
 y2 = polyval(p, x2);
 
