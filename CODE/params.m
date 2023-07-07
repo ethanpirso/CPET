@@ -69,9 +69,10 @@ switch stim
             case 'y'
                 prefs;
             case 'n'
-                stimSize = input('stimulus size, pixels (e.g. 75): ');
-                viewingDistanceCm = input('viewing distance, cm: ');
-                freqCpdDesired = input('spatial frequency, cpd (e.g. 4): ');
+                stimSize = input('stimulus size, pixels (e.g. 80): ');
+                viewingDistanceCm = input('viewing distance, cm (e.g. 80): ');
+                freqCpdDesired = input('spatial frequency, cpd (e.g. 4.5): ');
+                contrast = input('initial stimulus contrast, % (e.g. 40): ');
                 conStep = input('constrast step size, percent decrease (e.g. 1): ');
                 fprintf('Select the desired movement type:\n');
                 fprintf('1: Jitter\n');
@@ -79,9 +80,9 @@ switch stim
                 movement = input('Enter the number corresponding to your selection: ');
                 switch movement 
                     case 1
-                        stepSize = input('stepSize, pixels (e.g. 150): ');
+                        stepSize = input('stepSize, pixels (e.g. 130): ');
                         dwellTime = input(['dwell time for each target presentation, ' ...
-                            'msec (e.g. 50): ']);
+                            'msec (e.g. 120): ']);
                         dist = input('enter "n" for normal or "u" for uniform distributed step size: ','s');
                     case 2
                         % IMPORTANT: choosing a dwellFrames too small triggers an error when 
@@ -96,8 +97,7 @@ switch stim
         res = 1*[stimSize stimSize];
         phase = 0;
         sc = 10;
-        tilt = 0;
-        contrast = 60;
+        tilt = 0;        
         aspectratio = 1.0;
         tw = res(1);
         th = res(2);

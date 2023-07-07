@@ -22,6 +22,7 @@ freqCpdDesired = 4.5;
 stepSize = 130;
 dwellTime = 120;
 dwellFrames = 11;
+contrast = 60;
 conStep = 0.8;
 movement = 2;
 dist = "u"; 
