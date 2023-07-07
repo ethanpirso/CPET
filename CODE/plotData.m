@@ -76,7 +76,7 @@ xlabel('Time (s)')
 fig1 = append(trialName,'_response','.fig');
 savefig(fig1);
 movefile(fig1,'../DATA/FIG')
-close
+% close
 
 %% Plot normalized position error and contrast
 
