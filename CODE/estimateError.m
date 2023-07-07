@@ -34,6 +34,18 @@ y_target = stimData(:,2);
 x_subject = gazeData(:,1);
 y_subject = gazeData(:,2);
 
+X = 0:length(gazeData)-1;
+X = X./stimFreq; % x-axis scaled to time (s)
+
+% Throw out first 5 seconds of data (removing initial saccade)
+X = X(X>=5);
+
+% Throw out first 5 seconds of data (removing initial saccade)
+x_target = x_target(X>=5);
+y_target = y_target(X>=5);
+x_subject = x_subject(X>=5);
+y_subject = y_subject(X>=5);
+
 % Fix lag and truncate ends
 [rx,xlags] = xcorr(x_target, x_subject);
 [ry,ylags] = xcorr(y_target, y_subject);

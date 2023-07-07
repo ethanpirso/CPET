@@ -33,6 +33,9 @@ for i=1:length(gazeData)
     end
 end
 
+% Median filter
+gazeData(:,:) = movmedian(gazeData(:,:),5);
+
 % Fix any lag and truncate ends
 [rx,xlags] = xcorr(stimData(:,1), gazeData(:,1));
 [ry,ylags] = xcorr(stimData(:,2), gazeData(:,2));
@@ -51,6 +54,14 @@ y_subject = gazeData(:,2);
 
 X = 0:length(gazeData)-1;
 X = X./stimFreq; % x-axis scaled to time (s)
+
+% Throw out first 5 seconds of data (removing initial saccade)
+X = X(X>=5);
+x_target = x_target(X>=5);
+y_target = y_target(X>=5);
+contrast = contrast(X>=5);
+x_subject = x_subject(X>=5);
+y_subject = y_subject(X>=5);
 
 %% Plot target, subject position, and contrast
 
