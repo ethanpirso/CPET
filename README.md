@@ -46,7 +46,7 @@ To run in 'demo' mode without EyeLink, enter '1' when prompted in the runCPET.m 
 
 For refractive analysis, you can run the generateRefractiveSeries.m script after completing a range of trials with a subject. This script will help in understanding how the subject's contrast thresholds vary with different diopters, which is crucial in determining the 'best' lens power for the subject. The generated plot and all extracted data will be saved for future reference.
 
-For further information, please read the 'CPET Guide' and review the docstrings of each script for more details of the program and its features.
+For further information, please read the 'CPET Guide.pdf' and review the docstrings of each script for more details of the program and its features.
 
 ## Dependencies
     • MATLAB
