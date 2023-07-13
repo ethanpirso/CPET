@@ -43,9 +43,9 @@ PsychImaging('PrepareConfiguration');
 Screen('TextSize', win, 26);
 Screen('TextStyle', win, 1);
 
-% Verify frame rate is 120Hz
+% Verify frame rate is the desired 'fr'
 if fr ~= Screen('NominalFrameRate',win)
-    error('PTB window frame rate not 120Hz')
+    warning('PTB window frame rate is %d Hz', Screen('NominalFrameRate',win))
 end
 
 HideCursor;

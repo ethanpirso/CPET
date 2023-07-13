@@ -60,22 +60,32 @@ end
 
 % Initialize stimulus positions for curvilinear trajectory
 if movement == 2 
-    % Set stimulus display time
-    stimulusDuration = 120; % seconds
-    
     % Initialize random trajectory
-    numPoints = 70; % controls speed
-    pointsPerSec = numPoints / stimulusDuration; % speed of stimulus
+    numPoints = 80; % num of points to interpolate
     canvasSize = 2/3; % proportion of the screen to display image within
     xPos = (rand(1, numPoints-1) * round(screenWidth*canvasSize)) + (screenWidth * (1-canvasSize)/2) - (stimSize / 2);
     yPos = (rand(1, numPoints-1) * round(screenHeight*canvasSize)) + (screenHeight * (1-canvasSize)/2) - (stimSize / 2);
     xPos = [X xPos];
-    yPos = [Y yPos]; 
+    yPos = [Y yPos];
+    
+    % Set constant velocity according to desired visual degrees per second
+    dps = 6; % degrees per second
+    ppd = calc_ppd(screenWidthCm, screenWidthPx, viewingDistanceCm); % pixels per degree
+    constVelocity = dps * ppd; % pixels per second
+    
+    % Calculate total path length
+    pathLengths = sqrt(diff(xPos).^2 + diff(yPos).^2);
+    totalPathLength = sum(pathLengths);
+    
+    % Calculate time to reach each point with constant velocity
+    timePoints = [0 cumsum(pathLengths/constVelocity)];
     
     % Get smooth curvilinear trajectory
-    t = linspace(0, stimulusDuration, numPoints);
-    ppx = spline(t, xPos);
-    ppy = spline(t, yPos);
+    ppx = spline(timePoints, xPos);
+    ppy = spline(timePoints, yPos);
+    
+    % Calculate stimulus duration based on the path length and constant velocity
+    stimulusDuration = totalPathLength / constVelocity; % seconds
     
     % Calculate the number of frames based on stimulus duration and velocity
     numFrames = round(stimulusDuration * Screen('FrameRate', win));
@@ -85,4 +95,5 @@ if movement == 2
     tVals = linspace(0, stimulusDuration, numFrames);
     xPosSmooth = ppval(ppx, tVals);
     yPosSmooth = ppval(ppy, tVals);
+
 end
