@@ -22,7 +22,7 @@ clear; close all
 params; % Initialize parameters for experiment
 initWin; % Initialize PTB window
 if ~demo
-    initEyelink; % Initialize the Eyelink and start recording
+    initEyelink; % Initialize the Eyelink
 end
 initStim; % Initialize the stimulus
 
