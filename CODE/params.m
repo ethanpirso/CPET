@@ -62,6 +62,12 @@ fprintf('3: Optotype\n')
 fprintf('4: Marmoset Face\n')
 stim = input('Enter the number corresponding to your selection: ');
 
+% General parameters
+screenWidthCm = 41;
+screenWidthPx = 1024;
+viewingDistanceCm = 80;
+grey = [0.8 0.8 0.8]; % Define screen colours
+
 switch stim
     case 1
         % Initial stimulus params for the gabor patch
@@ -70,7 +76,7 @@ switch stim
                 prefs;
             case 'n'
                 stimSize = input('stimulus size, pixels (e.g. 80): ');
-                viewingDistanceCm = input('viewing distance, cm (e.g. 80): ');
+%                 viewingDistanceCm = input('viewing distance, cm (e.g. 80): ');
                 freqCpdDesired = input('spatial frequency, cpd (e.g. 4.5): ');
                 contrast = input('initial stimulus contrast, % (e.g. 40): ');
                 conStep = input('constrast step size, percent decrease (e.g. 1): ');
@@ -103,8 +109,6 @@ switch stim
         th = res(2);
         x=tw/2;
         y=th/2;
-        screenWidthCm = 41;
-        screenWidthPx = 1024;
         freq = calc_freq_cpd(screenWidthCm, screenWidthPx, viewingDistanceCm, freqCpdDesired);
         fr = 120;
         if movement == 1
@@ -168,6 +172,3 @@ switch stim
             stimFreq = 1/(1/fr + dwellFrames/fr);
         end
 end
-
-% Define screen colours
-grey = [0.8 0.8 0.8];

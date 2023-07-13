@@ -17,7 +17,7 @@
 % - dist: Preferred distribution for the step size, either "normal" or "uniform".
 
 stimSize = 80;
-viewingDistanceCm = 80;
+% viewingDistanceCm = 80;
 freqCpdDesired = 4.5;
 stepSize = 130;
 dwellTime = 120;
