@@ -47,7 +47,7 @@ switch stim
         optotype = imread(strcat('../STIMULI/OPTOTYPES/', optotypes(optoidx), '_reg.tif'));
         optotype = imresize(optotype, [stimSize stimSize]);
         optotype = double(optotype) ./ 255;
-        optotype(optotype>0.8) = grey(1);
+        optotype(optotype>grey(1)) = optotype(optotype>grey(1)) - (1 - grey(1));
         optotex = Screen('MakeTexture', win, optotype);
     case 4
         % Make the marmoset image into a texture   

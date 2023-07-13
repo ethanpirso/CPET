@@ -36,14 +36,15 @@ switch stim
         % Draw Optotype
         Screen('DrawTexture', win, optotex, [], [X Y X + stimSize Y + stimSize]);
         Screen('Flip', win);
-        imgColor = grey(1) - grey(1) * contrast / 100;
-        optotype(optotype<grey(1)) = imgColor;
+        if mod(frame,dwellFrames) == 0
+            optotype = optotype * (1 - conStep/100) + grey(1) * (conStep/100);
+        end
         optotex = Screen('MakeTexture', win, optotype);
     case 4
         % Draw Marmoset
         Screen('DrawTexture', win, marmosettex, [], [X Y X + stimSize Y + stimSize]);
         Screen('Flip', win);
-        if mod(frame,14) == 0
+        if mod(frame,dwellFrames) == 0
             marmoset = marmoset * (1 - conStep/100) + grey(1) * (conStep/100);
         end
         marmosettex = Screen('MakeTexture', win, marmoset);
