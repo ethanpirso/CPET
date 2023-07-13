@@ -23,7 +23,7 @@
 switch stim
     case 1
         % Draw Gabor
-        Screen('DrawTexture', win, gabortex, [], [X Y X + tw Y + th], ...
+        Screen('DrawTexture', win, gabortex, [], [X Y X + stimSize Y + stimSize], ...
             tilt, [], [], [], [], kPsychDontDoRotation, [phase, freq, sc, contrast, aspectratio, 0, 0, 0]);
         Screen('Flip', win);
     case 2

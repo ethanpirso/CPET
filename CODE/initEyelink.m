@@ -78,7 +78,7 @@ Screen('FillRect' ,win, grey, windowRect);
 Screen('Flip', win);
 
 % Start EyeLink data acquisition for experiment
-% Eyelink('StartRecording'); % Moved to runCPET.m
+Eyelink('StartRecording');
 gazeData = []; % Initialize the gaze data matrix
 
 trackedEye = Eyelink('EyeAvailable');

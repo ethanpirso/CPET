@@ -52,23 +52,23 @@ contrast = stimData(:,3);
 x_subject = gazeData(:,1);
 y_subject = gazeData(:,2);
 
-X = 0:length(gazeData)-1;
-X = X./stimFreq; % x-axis scaled to time (s)
+xaxis = 0:length(gazeData)-1;
+xaxis = xaxis./stimFreq; % x-axis scaled to time (s)
 
-% Throw out first 5 seconds of data (removing initial saccade)
-X = X(X>=5);
-x_target = x_target(X>=5);
-y_target = y_target(X>=5);
-contrast = contrast(X>=5);
-x_subject = x_subject(X>=5);
-y_subject = y_subject(X>=5);
+% Throw out first 8 seconds of data (removing initial saccade and instructions)
+xaxis = xaxis(xaxis>=8);
+x_target = x_target(xaxis>=8);
+y_target = y_target(xaxis>=8);
+contrast = contrast(xaxis>=8);
+x_subject = x_subject(xaxis>=8);
+y_subject = y_subject(xaxis>=8);
 
 %% Plot target, subject position, and contrast
 
 subplot(2,1,1);
 hold on
-plot(X,x_target, 'black-')
-plot(X,x_subject, 'red-')
+plot(xaxis,x_target, 'black-')
+plot(xaxis,x_subject, 'red-')
 hold off
 ylabel('X Position')
 legend('Target', 'Subject')
@@ -76,11 +76,11 @@ xlabel('Time (s)')
 
 subplot(2,1,2);
 hold on
-plot(X,y_target, 'black-')
-plot(X,y_subject, 'red-')
+plot(xaxis,y_target, 'black-')
+plot(xaxis,y_subject, 'red-')
 hold off
 ylabel('Y Position')
-legend('Target', 'Subject')
+% legend('Target', 'Subject')
 xlabel('Time (s)')
 
 % Save figure
@@ -106,22 +106,22 @@ conCI = [round(contrast(find(CI_L>=3,1)),2), round(contrast(find(CI_U>=3,1)),2)]
 figure;
 yyaxis left
 hold on
-plot(X,err,'.','MarkerSize',0.8,'DisplayName','Error');
-plot(X,M, '-','LineWidth',2,'DisplayName','Moving Error');
-plot(X,CI_L,'LineStyle','--','LineWidth',1,'DisplayName','95% CI Error');
-plot(X,CI_U,'LineStyle','--','LineWidth',1,'HandleVisibility','off');
+plot(xaxis,err,'.','MarkerSize',0.8,'DisplayName','Error');
+plot(xaxis,M, '-','LineWidth',2,'DisplayName','Moving Error');
+plot(xaxis,CI_L,'LineStyle','--','LineWidth',1,'DisplayName','95% CI Error');
+plot(xaxis,CI_U,'LineStyle','--','LineWidth',1,'HandleVisibility','off');
 ylim([min(err)-1, max(err)+1])
-x1 = xline(X(find(M>=3,1)),'-',{string(conThreshold)},'FontSize',11,'DisplayName','Contrast Threshold');
+x1 = xline(xaxis(find(M>=3,1)),'-',{string(conThreshold)},'FontSize',11,'DisplayName','Contrast Threshold');
 x1.LabelVerticalAlignment = 'middle';
 x1.LabelHorizontalAlignment = 'center';
 % x1.LabelOrientation = 'horizontal';
 % x1.Color = [0.8500 0.3250 0.0980];
 % x1.LineWidth = 1.5;
-xCI_L = xline(X(find(CI_L>=3,1)),'--',{string(conCI(1))},'FontSize',11,'DisplayName','95% CI Con. Threshold');
+xCI_L = xline(xaxis(find(CI_L>=3,1)),'--',{string(conCI(1))},'FontSize',11,'DisplayName','95% CI Con. Threshold');
 xCI_L.LabelVerticalAlignment = 'middle';
 xCI_L.LabelHorizontalAlignment = 'right';
 xCI_L.Color = [0.8500 0.3250 0.0980];
-xCI_U = xline(X(find(CI_U>=3,1)),'--',{string(conCI(2))},'FontSize',11,'HandleVisibility','off');
+xCI_U = xline(xaxis(find(CI_U>=3,1)),'--',{string(conCI(2))},'FontSize',11,'HandleVisibility','off');
 xCI_U.LabelVerticalAlignment = 'middle';
 xCI_U.LabelHorizontalAlignment = 'left';
 xCI_U.Color = [0.8500 0.3250 0.0980];
@@ -129,8 +129,8 @@ hold off
 ylabel('Normalized Pos Error (MAD)')
 yyaxis right
 % plot(X,contrast,'DisplayName','Stimulus Contrast');
-semilogy(X,contrast,'Color',[0.8500 0.3250 0.0980],'DisplayName','Stimulus Contrast');
-xlim([0,max(X)])
+semilogy(xaxis,contrast,'Color',[0.8500 0.3250 0.0980],'DisplayName','Stimulus Contrast');
+xlim([0,max(xaxis)+3])
 ylim([min(err)-1,20]);
 ylabel('Contrast (%)')
 xlabel('Time (s)')
