@@ -13,7 +13,6 @@
 % Output variables in the workspace:
 % - el: Eyelink defaults structure.
 % - gazeData: Empty matrix to store gaze data.
-% - trackedEye: Indicates the tracked eye (left or right).
 
 % Constants and parameters definitions
 

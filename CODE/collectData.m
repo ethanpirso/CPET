@@ -12,6 +12,7 @@
 % - contrast: Contrast of the stimulus.
 %
 % Output variables in the workspace:
+% - trackedEye: Indicates the tracked eye (left or right).
 % - gazeData: Updated matrix containing gaze positions for each frame.
 % - stimData: Updated matrix containing stimulus positions and contrast for each frame.
 
@@ -20,7 +21,7 @@ if exist('demo','var') && ~demo
     [samples, events, drained] = Eyelink('GetQueuedData'); 
     
     trackedEye = Eyelink('EyeAvailable');
-    
+
     switch trackedEye % checks tracked eye recording status
         case el.BINOCULAR
             error('tracker indicates binocular');
