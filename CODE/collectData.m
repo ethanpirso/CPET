@@ -19,6 +19,8 @@ if exist('demo','var') && ~demo
     % Collect all data from eyelink
     [samples, events, drained] = Eyelink('GetQueuedData'); 
     
+    trackedEye = Eyelink('EyeAvailable');
+    
     switch trackedEye % checks tracked eye recording status
         case el.BINOCULAR
             error('tracker indicates binocular');

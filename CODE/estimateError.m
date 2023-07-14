@@ -34,30 +34,28 @@ y_target = stimData(:,2);
 x_subject = gazeData(:,1);
 y_subject = gazeData(:,2);
 
+% % Fix lag and truncate ends
+% [rx,xlags] = xcorr(x_target, x_subject);
+% [ry,ylags] = xcorr(y_target, y_subject);
+% Elag = min(xlags(rx==max(rx)), ylags(ry==max(ry)));
+% if Elag <= 0 % assume that gaze lags target position always
+%     x_subject = circshift(x_subject,Elag);
+%     y_subject = circshift(y_subject,Elag);
+%     x_target = x_target(1:end+Elag,:);
+%     y_target = y_target(1:end+Elag,:);
+%     x_subject = x_subject(1:end+Elag,:); 
+%     y_subject = y_subject(1:end+Elag,:);
+% end
+
 xaxis = 0:length(gazeData)-1;
 xaxis = xaxis./stimFreq; % x-axis scaled to time (s)
 
-% Throw out first 5 seconds of data (removing initial saccade)
+% Throw out first 5 seconds of data (removing initial saccade and instructions)
 xaxis = xaxis(xaxis>=5);
-
-% Throw out first 8 seconds of data (removing initial saccade and instructions)
-x_target = x_target(xaxis>=8);
-y_target = y_target(xaxis>=8);
-x_subject = x_subject(xaxis>=8);
-y_subject = y_subject(xaxis>=8);
-
-% Fix lag and truncate ends
-[rx,xlags] = xcorr(x_target, x_subject);
-[ry,ylags] = xcorr(y_target, y_subject);
-Elag = min(xlags(rx==max(rx)), ylags(ry==max(ry)));
-if Elag <= 0 % assume that gaze lags target position always
-    x_subject = circshift(x_subject,Elag);
-    y_subject = circshift(y_subject,Elag);
-    x_target = x_target(1:end+Elag,:);
-    y_target = y_target(1:end+Elag,:);
-    x_subject = x_subject(1:end+Elag,:); 
-    y_subject = y_subject(1:end+Elag,:);
-end
+x_target = x_target(xaxis>=5);
+y_target = y_target(xaxis>=5);
+x_subject = x_subject(xaxis>=5);
+y_subject = y_subject(xaxis>=5);
 
 % Calculate the position error and normalize it
 err = normalize(sqrt((x_subject - x_target).^2 + (y_subject - y_target).^2) ...

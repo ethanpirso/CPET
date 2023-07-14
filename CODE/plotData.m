@@ -36,6 +36,13 @@ end
 % Median filter
 gazeData(:,:) = movmedian(gazeData(:,:),5);
 
+% Extract the data
+x_target = stimData(:,1);
+y_target = stimData(:,2);
+contrast = stimData(:,3);
+x_subject = gazeData(:,1);
+y_subject = gazeData(:,2);
+
 % Fix any lag and truncate ends
 [rx,xlags] = xcorr(stimData(:,1), gazeData(:,1));
 [ry,ylags] = xcorr(stimData(:,2), gazeData(:,2));
@@ -45,23 +52,16 @@ gazeData = circshift(gazeData,lag,1);
 gazeData = gazeData(1:end+lag,:);
 stimData =stimData(1:end+lag,:);
 
-% Extract the data
-x_target = stimData(:,1);
-y_target = stimData(:,2);
-contrast = stimData(:,3);
-x_subject = gazeData(:,1);
-y_subject = gazeData(:,2);
-
 xaxis = 0:length(gazeData)-1;
 xaxis = xaxis./stimFreq; % x-axis scaled to time (s)
 
-% Throw out first 8 seconds of data (removing initial saccade and instructions)
-xaxis = xaxis(xaxis>=8);
-x_target = x_target(xaxis>=8);
-y_target = y_target(xaxis>=8);
-contrast = contrast(xaxis>=8);
-x_subject = x_subject(xaxis>=8);
-y_subject = y_subject(xaxis>=8);
+% Throw out first 5 seconds of data (removing initial saccade and instructions)
+xaxis = xaxis(xaxis>=5);
+x_target = x_target(xaxis>=5);
+y_target = y_target(xaxis>=5);
+contrast = contrast(xaxis>=5);
+x_subject = x_subject(xaxis>=5);
+y_subject = y_subject(xaxis>=5);
 
 %% Plot target, subject position, and contrast
 

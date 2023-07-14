@@ -77,21 +77,4 @@ end
 Screen('FillRect' ,win, grey, windowRect);
 Screen('Flip', win);
 
-% Start EyeLink data acquisition for experiment
-Eyelink('StartRecording');
 gazeData = []; % Initialize the gaze data matrix
-
-trackedEye = Eyelink('EyeAvailable');
-
-switch trackedEye % checks tracked eye recording status
-    case el.BINOCULAR
-        error('tracker indicates binocular');
-    case el.LEFT_EYE
-        disp('tracker indicates left eye');
-    case el.RIGHT_EYE
-        disp('tracker indicates right eye')
-    case -1
-        error('eyeavailable returned -1');
-    otherwise
-        error('unexpected result from eyeavailable');
-end
