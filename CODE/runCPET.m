@@ -34,7 +34,7 @@ DrawFormattedText(win, 'Track the stimulus. Press "esc" to escape.', ...
         'center', 300);
 % Draw the stimulus
 drawStim;
-WaitSecs(1.5);
+WaitSecs(2);
 
 % Main loop to continuously draw the stimulus, collect data, and update position
 tic;
