@@ -25,17 +25,6 @@
 
 %% Preprocess Data
 
-% Remove blinks
-for i=1:length(gazeData)
-    if gazeData(i,1) < 0 || gazeData(i,2) < 0
-        gazeData(i,1) = gazeData(i-1,1);
-        gazeData(i,2) = gazeData(i-1,2);
-    end
-end
-
-% Median filter
-gazeData(:,:) = movmedian(gazeData(:,:),5);
-
 % Extract the data
 x_target = stimData(:,1);
 y_target = stimData(:,2);
@@ -43,14 +32,31 @@ contrast = stimData(:,3);
 x_subject = gazeData(:,1);
 y_subject = gazeData(:,2);
 
-% Fix any lag and truncate ends
-[rx,xlags] = xcorr(stimData(:,1), gazeData(:,1));
-[ry,ylags] = xcorr(stimData(:,2), gazeData(:,2));
+% Remove blinks
+for i=1:length(gazeData)
+    if gazeData(i,1) < 0 || gazeData(i,2) < 0
+        x_subject(i) = gazeData(i-1,1);
+        y_subject(i) = gazeData(i-1,2);
+    end
+end
+
+% Median filter
+x_subject(:) = movmedian(gazeData(:,1),5);
+y_subject(:) = movmedian(gazeData(:,2),5);
+
+% Fix lag and truncate ends
+[rx,xlags] = xcorr(x_target, x_subject);
+[ry,ylags] = xcorr(y_target, y_subject);
 lag = min(xlags(rx==max(rx)), ylags(ry==max(ry)));
 % stem(xlags, rx);
-gazeData = circshift(gazeData,lag,1);
-gazeData = gazeData(1:end+lag,:);
-stimData =stimData(1:end+lag,:);
+if lag <= 0 % assume that gaze lags target position always
+    x_subject = circshift(x_subject,lag);
+    y_subject = circshift(y_subject,lag);
+    x_target = x_target(1:end+lag,:);
+    y_target = y_target(1:end+lag,:);
+    x_subject = x_subject(1:end+lag,:); 
+    y_subject = y_subject(1:end+lag,:);
+end
 
 xaxis = 0:length(gazeData)-1;
 xaxis = xaxis./stimFreq; % x-axis scaled to time (s)
