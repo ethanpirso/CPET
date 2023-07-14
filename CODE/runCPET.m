@@ -31,7 +31,7 @@ stop = 0; % flag for early trial stopping criterion
 
 % Display instructions for 3 seconds at the beginning of the trial
 DrawFormattedText(win, 'Track the stimulus. Press "esc" to escape.', ...
-        'center', 300)
+        'center', 300);
 % Draw the stimulus
 drawStim;
 WaitSecs(3);
