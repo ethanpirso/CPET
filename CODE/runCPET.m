@@ -36,11 +36,6 @@ DrawFormattedText(win, 'Track the stimulus. Press "esc" to escape.', ...
 drawStim;
 WaitSecs(1.5);
 
-if ~demo
-    % Start EyeLink data acquisition for experiment
-    Eyelink('StartRecording');
-end
-
 % Main loop to continuously draw the stimulus, collect data, and update position
 tic;
 while 1

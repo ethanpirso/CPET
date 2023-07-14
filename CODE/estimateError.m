@@ -27,16 +27,16 @@ x_subject = gazeData(:,1);
 y_subject = gazeData(:,2);
 
 % Remove blinks
-for i=1:length(gazeData)
-    if gazeData(i,1) < 0 || gazeData(i,2) < 0
-        x_subject(i) = gazeData(i-1,1);
-        y_subject(i) = gazeData(i-1,2);
+for i=1:length(x_subject)
+    if x_subject(i) < 0 || y_subject(i) < 0
+        x_subject(i) = x_subject(i-1);
+        y_subject(i) = y_subject(i-1);
     end
 end
 
 % Median filter
-x_subject(:) = movmedian(gazeData(:,1),5);
-y_subject(:) = movmedian(gazeData(:,2),5);
+x_subject(:) = movmedian(x_subject(:),5);
+y_subject(:) = movmedian(y_subject(:),5);
 
 % Fix lag and truncate ends
 [rx,xlags] = xcorr(x_target, x_subject);
@@ -51,15 +51,15 @@ if lag <= 0 % assume that gaze lags target position always
     y_subject = y_subject(1:end+lag,:);
 end
 
-xaxis = 0:length(gazeData)-1;
+xaxis = 0:length(x_subject)-1;
 xaxis = xaxis./stimFreq; % x-axis scaled to time (s)
 
 % Throw out first 5 seconds of data (removing initial saccade and instructions)
-xaxis = xaxis(xaxis>=5);
-x_target = x_target(xaxis>=5);
-y_target = y_target(xaxis>=5);
-x_subject = x_subject(xaxis>=5);
-y_subject = y_subject(xaxis>=5);
+% xaxis = xaxis(xaxis>=5);
+% x_target = x_target(xaxis>=5);
+% y_target = y_target(xaxis>=5);
+% x_subject = x_subject(xaxis>=5);
+% y_subject = y_subject(xaxis>=5);
 
 % Calculate the position error and normalize it
 err = normalize(sqrt((x_subject - x_target).^2 + (y_subject - y_target).^2) ...
