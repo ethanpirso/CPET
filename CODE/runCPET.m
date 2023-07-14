@@ -7,7 +7,7 @@
 %              Upon completion of the loop, the script closes the PTB window, halts recording and disconnects from 
 %              the EyeLink device, plots data, and saves the data in a specific file. 
 % Dependencies: params.m, initWin.m, initEyelink.m, initStim.m, collectData.m,
-%              estimateError.m, drawStim.m, updateStim.m, closeEyelink.m, plotData.m
+%               estimateError.m, drawStim.m, updateStim.m, closeEyelink.m, plotData.m
 %
 % Input variables in the workspace:
 % - None
