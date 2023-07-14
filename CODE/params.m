@@ -46,7 +46,16 @@
 
 commandwindow; % bring command window forward for inputs
 
+% Constants
+fr = 120;
+screenWidthCm = 41;
+screenWidthPx = 1024;
+viewingDistanceCm = 80;
+grey = [0.8 0.8 0.8];
+
+% To run program as demo
 demo = input('\nrun as demo without EyeLink? 1 or 0 (yes or no): ');
+
 if ~demo
     subject = input('enter subject identifier code (e.g. 001): ','s');
     trial = input('enter trial number: ','s');
@@ -54,19 +63,9 @@ if ~demo
     trialName = append(subject,'_',trial);
 end
 
-% Prompt the experimenter to select the desired stimulus
-fprintf('Select the desired stimulus:\n');
-fprintf('1: Gabor\n');
-fprintf('2: Letter\n');
-fprintf('3: Optotype\n')
-fprintf('4: Marmoset Face\n')
+% Select Stimulus
+fprintf('Select the desired stimulus:\n1: Gabor\n2: Letter\n3: Optotype\n4: Marmoset Face\n');
 stim = input('Enter the number corresponding to your selection: ');
-
-% General parameters
-screenWidthCm = 41;
-screenWidthPx = 1024;
-viewingDistanceCm = 80;
-grey = [0.8 0.8 0.8]; % Define screen colours
 
 switch stim
     case 1
@@ -76,13 +75,10 @@ switch stim
                 prefs;
             case 'n'
                 stimSize = input('stimulus size, pixels (e.g. 80): ');
-%                 viewingDistanceCm = input('viewing distance, cm (e.g. 80): ');
                 freqCpdDesired = input('spatial frequency, cpd (e.g. 4.5): ');
                 contrast = input('initial stimulus contrast, % (e.g. 40): ');
                 conStep = input('constrast step size, percent decrease (e.g. 1): ');
-                fprintf('Select the desired movement type:\n');
-                fprintf('1: Jitter\n');
-                fprintf('2: Curvilinear Trajectory\n');
+                fprintf('Select the desired movement type:\n1: Jitter\n2: Curvilinear Trajectory\n');
                 movement = input('Enter the number corresponding to your selection: ');
                 switch movement 
                     case 1
@@ -98,8 +94,7 @@ switch stim
         
             otherwise
                 error('unexpected input');
-        end
-        
+        end     
         res = 1*[stimSize stimSize];
         phase = 0;
         sc = 10;
@@ -110,12 +105,6 @@ switch stim
         x=tw/2;
         y=th/2;
         freq = calc_freq_cpd(screenWidthCm, screenWidthPx, viewingDistanceCm, freqCpdDesired);
-        fr = 120;
-        if movement == 1
-            stimFreq = 1/(1/fr + dwellTime/1000);
-        elseif movement == 2
-            stimFreq = 1/(1/fr + dwellFrames/fr);
-        end
     case 2
         % Initial stimulus params for letter
         letter = input('stimulus letter (e.g. "E"): ','s');
@@ -127,12 +116,6 @@ switch stim
         conStep = 1.5;
         movement = 2;
         contrast = 100;
-        fr = 120;
-        if movement == 1
-            stimFreq = 1/(1/fr + dwellTime/1000);
-        elseif movement == 2
-            stimFreq = 1/(1/fr + dwellFrames/fr);
-        end
     case 3
         % Initial stimulus params for Aukland Optotype
         % Prompt the experimenter to select the desired optotype
@@ -151,12 +134,6 @@ switch stim
         conStep = 1.5;
         movement = 2;
         contrast = 100;
-        fr = 120;
-        if movement == 1
-            stimFreq = 1/(1/fr + dwellTime/1000);
-        elseif movement == 2
-            stimFreq = 1/(1/fr + dwellFrames/fr);
-        end
     case 4
         stimSize = 110;
         stepSize = 120;
@@ -165,10 +142,11 @@ switch stim
         conStep = 1.5;
         movement = 2;
         contrast = 100;
-        fr = 120;
-        if movement == 1
-            stimFreq = 1/(1/fr + dwellTime/1000);
-        elseif movement == 2
-            stimFreq = 1/(1/fr + dwellFrames/fr);
-        end
+end
+
+% Calculate stimulus frequency
+if movement == 1
+    stimFreq = 1/(1/fr + dwellTime/1000);
+elseif movement == 2
+    stimFreq = 1/(1/fr + dwellFrames/fr);
 end

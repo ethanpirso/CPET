@@ -1,6 +1,6 @@
 % Continuous Psychophysics with Eye Tracking (CPET): initStim.m
 % Author: Ethan Pirso
-% Description: Initializes the position and properties of the stimulus.
+% Description: Initializes the position and properties of the stimulus with constant velocity across random trajectories.
 %              This script is generalized to handle different types of stimuli like Gabor patches, Letters, Aukland Optotypes, and Marmoset stimuli.
 % Dependencies: None
 % Called by: runCPET.m
@@ -17,6 +17,10 @@
 % - optotypes: Array containing the names of optotype images.
 % - optoidx: Index for the optotype array.
 % - movement: The type of movement for the stimulus (2 for curvilinear trajectory).
+% - dps: Desired velocity in degrees of visual angle per second for curvilinear trajectory.
+% - screenWidthCm: Width of the screen in centimeters.
+% - screenWidthPx: Width of the screen in pixels.
+% - viewingDistanceCm: Viewing distance in centimeters.
 %
 % Output variables in the workspace:
 % - gabortex: Procedural Gabor texture (if Gabor patch is the selected stimulus).
@@ -26,9 +30,12 @@
 % - X: X coordinate of the stimulus center on the screen.
 % - Y: Y coordinate of the stimulus center on the screen.
 % - xPosSmooth, yPosSmooth: Smooth curvilinear trajectory for smooth pursuit movement.
-% - stimulusDuration: Duration for displaying the stimulus (only for curvilinear trajectory movement).
+% - constVelocity: Constant velocity for curvilinear trajectory (pixels per second).
+% - stimulusDuration: Duration for displaying the stimulus (calculated based on the constant velocity and total path length for curvilinear trajectory movement).
 % - numFrames: The number of frames based on stimulus duration and velocity (only for curvilinear trajectory movement).
 % - frameDuration: Duration for a frame (only for curvilinear trajectory movement).
+%
+% Note: This version of the script generates a smooth curvilinear trajectory for the stimulus where the velocity is constant, and the time to traverse the trajectory is variable based on the total path length and the set constant velocity.
 
 % Initialize the position of the stimulus
 X = (screenWidth / 2) - (stimSize / 2);
