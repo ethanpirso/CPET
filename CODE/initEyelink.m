@@ -77,3 +77,5 @@ Screen('FillRect' ,win, grey, windowRect);
 Screen('Flip', win);
 
 gazeData = []; % Initialize the gaze data matrix
+% Start EyeLink data acquisition for experiment
+Eyelink('StartRecording');
