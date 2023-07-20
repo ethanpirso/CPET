@@ -63,8 +63,7 @@ xaxis = 0:length(x_subject)-1;
 xaxis = xaxis./stimFreq; % x-axis scaled to time (s)
 
 % Throw out first 5 seconds of data (removing initial saccade and instructions)
-startIdx = find(round(xaxis)==5);
-startIdx = median(startIdx)-1;
+startIdx = floor(median(find(round(xaxis)==5))-1);
 xaxis = xaxis(startIdx:end);
 x_target = x_target(startIdx:end);
 y_target = y_target(startIdx:end);
