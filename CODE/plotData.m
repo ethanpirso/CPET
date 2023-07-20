@@ -54,6 +54,7 @@ if lag <= 0 % assume that gaze lags target position always
     y_subject = circshift(y_subject,lag);
     x_target = x_target(1:end+lag,:);
     y_target = y_target(1:end+lag,:);
+    contrast = contrast(1:end+lag,:);
     x_subject = x_subject(1:end+lag,:); 
     y_subject = y_subject(1:end+lag,:);
 end
@@ -62,13 +63,14 @@ xaxis = 0:length(x_subject)-1;
 xaxis = xaxis./stimFreq; % x-axis scaled to time (s)
 
 % Throw out first 5 seconds of data (removing initial saccade and instructions)
-% startIdx = find(xaxis==5);
-% xaxis = xaxis(startIdx:end);
-% x_target = x_target(startIdx:end);
-% y_target = y_target(startIdx:end);
-% contrast = contrast(startIdx:end);
-% x_subject = x_subject(startIdx:end);
-% y_subject = y_subject(startIdx:end);
+startIdx = find(round(xaxis)==5);
+startIdx = median(startIdx)-1;
+xaxis = xaxis(startIdx:end);
+x_target = x_target(startIdx:end);
+y_target = y_target(startIdx:end);
+contrast = contrast(startIdx:end);
+x_subject = x_subject(startIdx:end);
+y_subject = y_subject(startIdx:end);
 
 %% Plot target, subject position, and contrast
 
@@ -80,6 +82,7 @@ hold off
 ylabel('X Position')
 legend('Target', 'Subject')
 xlabel('Time (s)')
+xlim([5,max(xaxis)+3])
 
 subplot(2,1,2);
 hold on
@@ -89,6 +92,7 @@ hold off
 ylabel('Y Position')
 % legend('Target', 'Subject')
 xlabel('Time (s)')
+xlim([5,max(xaxis)+3])
 
 % Save figure
 fig1 = append(trialName,'_response','.fig');
@@ -137,7 +141,7 @@ ylabel('Normalized Pos Error (MAD)')
 yyaxis right
 % plot(X,contrast,'DisplayName','Stimulus Contrast');
 semilogy(xaxis,contrast,'Color',[0.8500 0.3250 0.0980],'DisplayName','Stimulus Contrast');
-xlim([0,max(xaxis)+3])
+xlim([5,max(xaxis)+3])
 ylim([min(err)-1,20]);
 ylabel('Contrast (%)')
 xlabel('Time (s)')
